@@ -1,9 +1,11 @@
-package com.wyy.ijandan;
+package com.wyy.ijandan.ui.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.wyy.ijandan.R;
 
 public class MainActivity extends AppCompatActivity {
 
