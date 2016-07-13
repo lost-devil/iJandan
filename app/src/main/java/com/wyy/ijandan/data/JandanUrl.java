@@ -7,7 +7,7 @@ public class JandanUrl {
 
     public static final String BORING_IMAGE = "http://jandan.net/pic";
 
-    public static final String BORING_IMAGE_PAGE_FORMAT = "http://jandan.net/pic/page-%i#comments";
+    public static final String BORING_IMAGE_PAGE_FORMAT = "http://jandan.net/pic/page-%i";
 
     public static String boringImage(int page) {
         return String.format(BORING_IMAGE_PAGE_FORMAT, page);
