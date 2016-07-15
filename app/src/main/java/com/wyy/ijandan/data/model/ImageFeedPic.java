@@ -1,5 +1,9 @@
 package com.wyy.ijandan.data.model;
 
+import android.text.TextUtils;
+
+import com.wyy.ijandan.utils.ImageUtil;
+
 /**
  * Created by yayun.wei on 2016/7/13.
  */
@@ -25,7 +29,31 @@ public class ImageFeedPic {
      */
     public String largeUrl;
 
+    /**
+     * 图片是否是Gif
+     * @return
+     */
     public boolean isGif() {
-        return false;
+        return ImageUtil.isGif(srcUrl);
+    }
+
+    /**
+     * 是否含图片
+     * @return
+     */
+    public boolean hasImage() {
+        return !TextUtils.isEmpty(srcUrl);
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        if (content != null) {
+            sb.append("content = ").append(content).append("\n");
+        }
+        sb.append("coverUrl = ").append(coverUrl).append("\n");
+        sb.append("srcUrl = ").append(srcUrl).append("\n");
+        sb.append("largeUrl = ").append(largeUrl);
+        return sb.toString();
     }
 }

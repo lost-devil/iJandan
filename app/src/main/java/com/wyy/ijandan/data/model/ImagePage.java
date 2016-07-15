@@ -9,5 +9,5 @@ public class ImagePage {
 
     public int pageNum;
 
-    List<ImageFeed> feeds;
+    public List<ImageFeed> feeds;
 }
