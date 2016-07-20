@@ -47,7 +47,7 @@ public class JsoupImagePageParser extends ImagePageParser<Element>{
         if (pageNumEle != null) {
             String pageNumStr = pageNumEle.text();
             if (!TextUtils.isEmpty(pageNumStr)) {
-                int pageNum = Integer.valueOf(pageNumStr.substring(1, pageNumStr.length() - 2));
+                int pageNum = Integer.valueOf(pageNumStr.substring(1, pageNumStr.length() - 1));
                 Log.i(TAG, "parsePageNum pageNum = " + pageNum);
                 return pageNum;
             }

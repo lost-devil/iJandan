@@ -6,8 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.wyy.ijandan.R;
-import com.wyy.ijandan.data.JandanUrl;
-import com.wyy.ijandan.data.loader.JsoupImagePageLoader;
+import com.wyy.ijandan.ui.image.boring.BoringImageFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -15,12 +14,9 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new JsoupImagePageLoader().load(JandanUrl.BORING_IMAGE);
-            }
-        }).start();
+        BoringImageFragment boringImageFragment = new BoringImageFragment();
+        getFragmentManager().beginTransaction()
+                .add(R.id.fragment_container, boringImageFragment).commit();
     }
 
     @Override

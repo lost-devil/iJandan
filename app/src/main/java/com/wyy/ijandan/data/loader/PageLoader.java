@@ -5,5 +5,5 @@ package com.wyy.ijandan.data.loader;
  */
 public interface PageLoader<T> {
 
-    T load(String url);
+    T load(String url) throws Exception;
 }
