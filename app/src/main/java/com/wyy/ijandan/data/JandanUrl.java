@@ -9,7 +9,15 @@ public class JandanUrl {
 
     public static final String BORING_IMAGE_PAGE_FORMAT = "http://jandan.net/pic/page-%d";
 
+    public static final String MEIZI_IMAGE = "http://jandan.net/ooxx";
+
+    public static final String MEIZI_IMAGE_PAGE_FORMAT = "http://jandan.net/ooxx/page-%d";
+
     public static String boringImage(int page) {
         return String.format(BORING_IMAGE_PAGE_FORMAT, page);
+    }
+
+    public static String meiziImage(int page) {
+        return String.format(MEIZI_IMAGE_PAGE_FORMAT, page);
     }
 }

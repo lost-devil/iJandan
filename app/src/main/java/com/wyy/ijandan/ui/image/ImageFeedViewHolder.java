@@ -35,7 +35,7 @@ public class ImageFeedViewHolder extends RecyclerView.ViewHolder{
             Glide.with(itemView.getContext())
                     .load(imageUrl)
                     .asBitmap()
-                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                     .placeholder(R.mipmap.ic_launcher)
                     .fitCenter()
                     .into(mImageView);

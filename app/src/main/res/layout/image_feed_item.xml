@@ -14,13 +14,15 @@
         app:cardCornerRadius="2dp"
         app:cardElevation="2dp">
 
-        <ImageView
-            android:id="@+id/feed_image"
+        <com.wyy.ijandan.view.SquareLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:minHeight="200dp"
-            android:maxHeight="300dp"
-            android:scaleType="fitCenter"/>
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/feed_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"/>
+        </com.wyy.ijandan.view.SquareLayout>
     </android.support.v7.widget.CardView>
 </LinearLayout>
