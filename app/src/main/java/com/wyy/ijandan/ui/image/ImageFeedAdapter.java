@@ -27,16 +27,16 @@ public class ImageFeedAdapter extends RecyclerView.Adapter<ImageFeedViewHolder>{
     }
 
     @Override
-    public ImageFeedViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.image_feed_item, viewGroup, false);
+    public ImageFeedViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.image_feed_item, parent, false);
         ImageFeedViewHolder viewHolder = new ImageFeedViewHolder(itemView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(ImageFeedViewHolder imageFeedViewHolder, int i) {
-        imageFeedViewHolder.bindImageFeed(mImageFeedList.get(i));
+    public void onBindViewHolder(ImageFeedViewHolder imageFeedViewHolder, int position) {
+        imageFeedViewHolder.bindImageFeed(mImageFeedList.get(position));
     }
 
     @Override
@@ -47,5 +47,10 @@ public class ImageFeedAdapter extends RecyclerView.Adapter<ImageFeedViewHolder>{
     @Override
     public void onViewRecycled(ImageFeedViewHolder holder) {
         super.onViewRecycled(holder);
+    }
+
+    @Override
+    public void onViewDetachedFromWindow(ImageFeedViewHolder holder) {
+        super.onViewDetachedFromWindow(holder);
     }
 }

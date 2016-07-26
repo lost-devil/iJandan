@@ -108,9 +108,13 @@ public class JsoupImageFeedParser extends ImageFeedParser<Element>{
         Elements picElements = feedNode.select(QUERY_PICS);
         if (picElements != null && picElements.size() > 0) {
             List<ImageFeedPic> pics = new ArrayList<>();
+            String contentTmp = "";
             for (Element picElement : picElements) {
                 String content = picElement.text();
                 if (!TextUtils.isEmpty(content)) {
+                    if (!TextUtils.isEmpty(contentTmp)) {
+                        content = contentTmp + "\n" + content;
+                    }
                     content = content.replace("[查看原图]", "");
                 }
                 Elements largeElements = picElement.getElementsByTag("a");
@@ -133,9 +137,13 @@ public class JsoupImageFeedParser extends ImageFeedParser<Element>{
                         pics.add(pic);
                     }
                 } else if (!TextUtils.isEmpty(content)) {//无图
-                    ImageFeedPic pic = new ImageFeedPic();
-                    pic.content = content;
-                    pics.add(pic);
+                    if (picElements.indexOf(picElement) == picElements.size() - 1) {//如果是最后一个
+                        if (pics.size() > 0) {
+                            pics.get(pics.size() - 1).content.concat("\n" + content);
+                        }
+                    } else {//如果不是最后一个
+                        contentTmp = content;
+                    }
                 }
             }
             return pics;

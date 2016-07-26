@@ -51,7 +51,7 @@ public class BoringImageFragment extends Fragment implements BoringImageContract
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        mPresenter.loadImagePage(9367);
+        mPresenter.loadImagePage(9405);
     }
 
     @Override
