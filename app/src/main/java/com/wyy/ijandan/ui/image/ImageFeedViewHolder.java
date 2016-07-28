@@ -5,11 +5,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wyy.ijandan.R;
 import com.wyy.ijandan.data.model.ImageFeed;
 import com.wyy.ijandan.data.model.ImageFeedPic;
@@ -66,7 +63,7 @@ public class ImageFeedViewHolder extends RecyclerView.ViewHolder
         } else {
             mThumbListView.setVisibility(View.GONE);
         }
-        ImagePagerAdapter imagePagerAdapter = new ImagePagerAdapter();
+        FeedImagePagerAdapter imagePagerAdapter = new FeedImagePagerAdapter();
         imagePagerAdapter.setDataAndNotify(imageFeed.pics);
         mImagePager.setAdapter(imagePagerAdapter);
         mThumbAdapter.setSelected(0);

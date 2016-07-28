@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wyy.ijandan.R;
 import com.wyy.ijandan.data.model.ImageFeedPic;
+import com.wyy.ijandan.ui.image.display.ImageDisplayActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,9 +19,9 @@ import java.util.List;
 /**
  * Created by yayun.wei on 2016/7/26.
  */
-public class ImagePagerAdapter extends PagerAdapter{
+public class FeedImagePagerAdapter extends PagerAdapter{
 
-    private List<ImageFeedPic> mImagePicList = new ArrayList<>();
+    private ArrayList<ImageFeedPic> mImagePicList = new ArrayList<>();
 
     public void setDataAndNotify(List<ImageFeedPic> pics) {
         if (pics != null) {
@@ -47,6 +48,14 @@ public class ImagePagerAdapter extends PagerAdapter{
         ImageView imageView = (ImageView)view.findViewById(R.id.feed_image);
         container.addView(view);
         loadImage(imageView, mImagePicList.get(position).srcUrl);
+        view.setTag(position);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = (int)v.getTag();
+                ImageDisplayActivity.show(v.getContext(), mImagePicList, position);
+            }
+        });
         return view;
     }
 
