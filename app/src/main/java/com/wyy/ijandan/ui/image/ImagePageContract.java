@@ -1,13 +1,13 @@
-package com.wyy.ijandan.ui.image.boring;
+package com.wyy.ijandan.ui.image;
 
 import com.wyy.ijandan.data.model.ImagePage;
 
 /**
  * Created by yayun.wei on 2016/7/18.
  */
-public interface BoringImageContract {
+public interface ImagePageContract {
 
-    public interface BoringImageView {
+    public interface ImagePageView {
 
         void onDataLoadPre();
 
@@ -16,8 +16,12 @@ public interface BoringImageContract {
         void onDataLoadError(String errMsg);
     }
 
-    public interface BoringImagePresenter {
+    public interface ImagePagePresenter {
 
         void loadImagePage(int pageNum);
+
+        void loadNewPage();
+
+        void loadOldPage();
     }
 }

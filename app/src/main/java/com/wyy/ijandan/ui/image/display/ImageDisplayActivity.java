@@ -54,6 +54,7 @@ public class ImageDisplayActivity extends AppCompatActivity
             mImagePicList = new ArrayList<>();
         }
     }
+
     @Override
     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 

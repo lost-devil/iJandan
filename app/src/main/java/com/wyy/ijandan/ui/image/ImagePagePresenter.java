@@ -1,4 +1,4 @@
-package com.wyy.ijandan.ui.image.boring;
+package com.wyy.ijandan.ui.image;
 
 import android.util.Log;
 
@@ -9,14 +9,16 @@ import com.wyy.ijandan.data.model.ImagePage;
 /**
  * Created by yayun.wei on 2016/7/19.
  */
-public class BoringImagePresenter implements BoringImageContract.BoringImagePresenter,
+public class ImagePagePresenter implements ImagePageContract.ImagePagePresenter,
         ImagePageLoadTask.ImagePageLoadCallback{
 
-    private static final String TAG = "BoringImagePresenter";
+    private static final String TAG = "ImagePagePresenter";
 
-    private BoringImageContract.BoringImageView mView;
+    private ImagePageContract.ImagePageView mView;
 
-    public BoringImagePresenter(BoringImageContract.BoringImageView view) {
+    private ImagePage mCurImagePage;
+
+    public ImagePagePresenter(ImagePageContract.ImagePageView view) {
         this.mView = view;
     }
 
@@ -31,8 +33,23 @@ public class BoringImagePresenter implements BoringImageContract.BoringImagePres
     }
 
     @Override
+    public void loadNewPage() {
+        if (mCurImagePage != null) {
+            loadImagePage(mCurImagePage.pageNum + 1);
+        }
+    }
+
+    @Override
+    public void loadOldPage() {
+        if (mCurImagePage != null) {
+            loadImagePage(mCurImagePage.pageNum - 1);
+        }
+    }
+
+    @Override
     public void onLoadSuccess(ImagePage imagePage) {
         Log.d(TAG, "onLoadSuccess");
+        mCurImagePage = imagePage;
         mView.onDataLoaded(imagePage);
     }
 
