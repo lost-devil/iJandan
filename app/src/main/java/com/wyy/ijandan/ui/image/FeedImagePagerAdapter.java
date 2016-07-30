@@ -5,6 +5,7 @@ import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -45,9 +46,11 @@ public class FeedImagePagerAdapter extends PagerAdapter{
     public Object instantiateItem(ViewGroup container, int position) {
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.feed_image_pager_item, null);
-        ImageView imageView = (ImageView)view.findViewById(R.id.feed_image);
+        final ImageView imageView = (ImageView)view.findViewById(R.id.feed_image);
+        Button playBtn = (Button)view.findViewById(R.id.gif_play_btn);
         container.addView(view);
-        loadImage(imageView, mImagePicList.get(position).srcUrl);
+        final ImageFeedPic pic = mImagePicList.get(position);
+        loadImage(imageView, pic.srcUrl);
         view.setTag(position);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,11 +59,24 @@ public class FeedImagePagerAdapter extends PagerAdapter{
                 ImageDisplayActivity.show(v.getContext(), mImagePicList, position);
             }
         });
+        if (pic.isGif()) {
+            playBtn.setVisibility(View.VISIBLE);
+            playBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    v.setVisibility(View.GONE);
+                    loadGif(imageView, pic.srcUrl);
+                }
+            });
+        } else {
+            playBtn.setVisibility(View.GONE);
+        }
         return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
+        ((ImageView)(((View)object).findViewById(R.id.feed_image))).setImageDrawable(null);
         container.removeView((View)object);
     }
 
@@ -70,6 +86,15 @@ public class FeedImagePagerAdapter extends PagerAdapter{
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.mipmap.ic_launcher)
+                .fitCenter()
+                .into(imageView);
+    }
+
+    private void loadGif(ImageView imageView, String url) {
+        Glide.with(imageView.getContext())
+                .load(url)
+                .asGif()
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .fitCenter()
                 .into(imageView);
     }
