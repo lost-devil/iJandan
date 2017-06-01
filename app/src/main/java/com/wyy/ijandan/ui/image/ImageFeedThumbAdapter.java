@@ -53,7 +53,7 @@ public class ImageFeedThumbAdapter extends RecyclerView.Adapter<ImageFeedThumbAd
     public void onBindViewHolder(ViewHolder holder, final int position) {
         final ImageFeedPic pic = mImagePicList.get(position);
         Glide.with(holder.mThumbView.getContext())
-                .load(pic.srcUrl)
+                .load(pic.coverUrl)
                 .asBitmap()
                 .diskCacheStrategy(DiskCacheStrategy.SOURCE)
                 .placeholder(R.mipmap.ic_launcher)

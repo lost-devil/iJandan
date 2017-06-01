@@ -57,26 +57,47 @@ public class ImageDisplayPagerAdapter extends PagerAdapter implements View.OnCli
         View view = LayoutInflater.from(container.getContext())
                 .inflate(R.layout.image_display_pager_item, null);
         ImageDisplayView imageDisplayView = (ImageDisplayView)view.findViewById(R.id.image_display_view);
+        View gifDisplayLayout = view.findViewById(R.id.gif_display_layout);
+        ImageView gifDisplayView = (ImageView)view.findViewById(R.id.gif_display_view);
+        ImageFeedPic pic = mImagePicList.get(position);
+        if (pic.isGif()) {
+            imageDisplayView.setVisibility(View.GONE);
+            gifDisplayLayout.setVisibility(View.VISIBLE);
+            view.setOnClickListener(this);
+            loadGif(gifDisplayView, pic);
+        } else {
+            imageDisplayView.setVisibility(View.VISIBLE);
+            gifDisplayLayout.setVisibility(View.GONE);
+            loadImage(imageDisplayView, pic);
+            imageDisplayView.setOnClickListener(this);
+        }
         container.addView(view);
-        loadImage(imageDisplayView, mImagePicList.get(position).srcUrl);
-        imageDisplayView.setOnClickListener(this);
         return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-        container.removeView((View)object);
+        container.removeView((View) object);
     }
 
-    private void loadImage(final ImageDisplayView imageView, String url) {
+    private void loadImage(final ImageDisplayView imageView, ImageFeedPic pic) {
         Glide.with(imageView.getContext())
-                .load(url)
+                .load(pic.srcUrl)
                 .downloadOnly(new SimpleTarget<File>() {
                     @Override
                     public void onResourceReady(File file, GlideAnimation<? super File> glideAnimation) {
                         imageView.setImageUri(Uri.fromFile(file));
                     }
                 });
+    }
+
+    private void loadGif(ImageView imageView, ImageFeedPic pic) {
+        Glide.with(imageView.getContext())
+                .load(pic.srcUrl)
+                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                .placeholder(R.mipmap.ic_launcher)
+                .fitCenter()
+                .into(imageView);
     }
 
     @Override

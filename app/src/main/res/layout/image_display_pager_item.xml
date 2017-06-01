@@ -7,4 +7,18 @@
         android:id="@+id/image_display_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <com.wyy.ijandan.view.SquareLayout
+        android:id="@+id/gif_display_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/gif_display_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"/>
+    </com.wyy.ijandan.view.SquareLayout>
 </RelativeLayout>

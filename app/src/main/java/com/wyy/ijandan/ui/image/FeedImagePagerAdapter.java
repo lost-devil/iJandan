@@ -50,12 +50,12 @@ public class FeedImagePagerAdapter extends PagerAdapter{
         Button playBtn = (Button)view.findViewById(R.id.gif_play_btn);
         container.addView(view);
         final ImageFeedPic pic = mImagePicList.get(position);
-        loadImage(imageView, pic.srcUrl);
+        loadImage(imageView, pic);
         view.setTag(position);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = (int)v.getTag();
+                int position = (int) v.getTag();
                 ImageDisplayActivity.show(v.getContext(), mImagePicList, position);
             }
         });
@@ -80,14 +80,29 @@ public class FeedImagePagerAdapter extends PagerAdapter{
         container.removeView((View)object);
     }
 
-    private void loadImage(ImageView imageView, String url) {
-        Glide.with(imageView.getContext())
-                .load(url)
-                .asBitmap()
-                .diskCacheStrategy(DiskCacheStrategy.SOURCE)
-                .placeholder(R.mipmap.ic_launcher)
-                .fitCenter()
-                .into(imageView);
+    private void loadImage(ImageView imageView, ImageFeedPic pic) {
+        if (pic.isGif()) {
+            Glide.with(imageView.getContext())
+                    .load(pic.srcUrl)
+                    .asBitmap()
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .thumbnail(Glide.with(imageView.getContext())
+                                    .load(pic.coverUrl)
+                                    .asBitmap()
+                                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                                    .fitCenter())
+                    .fitCenter()
+                    .into(imageView);
+        } else {
+            Glide.with(imageView.getContext())
+                    .load(pic.srcUrl)
+                    .asBitmap()
+                    .diskCacheStrategy(DiskCacheStrategy.SOURCE)
+                    .placeholder(R.mipmap.ic_launcher)
+                    .fitCenter()
+                    .into(imageView);
+        }
     }
 
     private void loadGif(ImageView imageView, String url) {
